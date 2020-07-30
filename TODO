@@ -1,3 +1,5 @@
 
-Todo:
-  ☐ Make twitter account scrapper with twitter api
+TwitterBias:
+  ☐ connect the twitter api to the twitterUserFinder to find the follows of a user to put them into a list
+
+  ☐ test out the speed of the sort command as well as getting rid of duplicates, see if there is a faster way of doing it.
