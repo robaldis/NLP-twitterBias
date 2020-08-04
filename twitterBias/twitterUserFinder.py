@@ -24,7 +24,7 @@ def limit_handler(cursor):
         try:
             yield cursor.next()
         except tweepy.RateLimitError:
-            print(f"Rate limit has been reached at {time.localtime(time.time())}")
+            print(f"Rate limit has been reached at {time.ctime(time.time())}")
             time.sleep((15 * 60) + 2)
             print("Wait time complete")
         except StopIteration:
@@ -66,12 +66,10 @@ def getTweets(userId, count):
             if not deadend:
                 page += 1
                 time.sleep(1)
-    except tweepy.TweepError as e:
-        print (e)
-        # if (e=='Twitter error response: status code = 429'):
-        print(f"Rate limit reached at {time.localtime(time.time())}")
-        time.sleep((15*60)+2)
-        print("Continuing to find tweets")
+    except tweepy.TweepError:
+            print(f"Rate limit reached at {time.ctime(time.time())}")
+            time.sleep((15*60)+2)
+            print("Continuing to find tweets")
     userDict = {
         userId: tweets
     }
