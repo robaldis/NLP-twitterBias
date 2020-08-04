@@ -29,6 +29,8 @@ def limit_handler(cursor):
             print("Wait time complete")
         except StopIteration:
             return
+        except tweepy.TweepError:
+            print("Can't get this information skipping the user")
 
 def getUser(userList, iterations):
 
