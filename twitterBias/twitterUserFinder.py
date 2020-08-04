@@ -4,7 +4,9 @@ import tweepy
 from dotenv import load_dotenv
 import time
 import os
+import pickle
 
+load_dotenv()
 # Get all the information to connect to the twitter api.
 consumer_key = os.getenv("API_KEY")
 consumer_secret = os.getenv("API_KEY_SECRET")
@@ -16,32 +18,73 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 # Connect with the twitter api
 api = tweepy.API(auth)
-def getUser(userList, iterations):
-    for user in tweepy.Cursor(api.followers,screen_name="RobertAldis").items(10):
-        try:
-            # user = next(users)
-            print(user.screen_name)
-        except tweepy.TweepError:
-            print("tweepy has reached its rate limit for now")
-            time.sleep(60 * 15)
-            print(user.screen_name)
-            # next(users)
-    # print(userList)
-    # for i in range(iterations):
-    #     newUsers = []
-    #     for user in userList:
-    #         print(user)
-    #         # append the new user list to the newUser list
-    #         newUsers.append(api.followers(user))
-    #         break
 
-    #     userList.append(newUsers)
-    #     #sort get rid of duplicates and sort the array
-    #     userList = list(dict.fromkeys(userList))
-    #     userList.sort()
-    # return userList
+def limit_handler(cursor):
+    while True:
+        try:
+            yield cursor.next()
+        except tweepy.RateLimitError:
+            print(f"Rate limit has been reached at {time.localtime(time.time())}")
+            time.sleep((15 * 60) + 2)
+            print("Wait time complete")
+        except StopIteration:
+            return
+
+def getUser(userList, iterations):
+
+    for i in range(iterations):
+        newUser = []
+        for user in userList:
+            for follower in limit_handler(tweepy.Cursor(api.friends_ids, user_id=user).items()):
+                newUser.append(follower)
+
+        userList += newUser
+        userList = list(set(userList))
+        userList.sort()
+    return userList
+    
+def getTweets(userId, count):
+    page = 1
+    deadend = False
+    tweets = []
+    lenPrev = 0
+    try:
+        while True:
+            for tweet in tweepy.Cursor(api.user_timeline,user_id=userId,page=page).items():
+                tweets.append(tweet)
+            if len(tweets) < count and len(tweets) > lenPrev:
+                lenPrev = len(tweets)
+                print ("Getting more posts")
+            else:
+                print("Deadend reached")
+                deadend = True
+                
+                userDict = {
+                    userId: tweets
+                }
+                return userDict
+            if not deadend:
+                page += 1
+                time.sleep(1)
+    except tweepy.TweepError as e:
+        if (e=='Twitter error response: status code = 429'):
+            print(f"Rate limit reached at {time.localtime(time.time())}")
+            time.sleep((15*60)+2)
+            print("Continuing to find tweets")
+    userDict = {
+        userId: tweets
+    }
+    return userDict
+
+
 
 
 if __name__ == "__main__":
-    getUser([], 2)
+    tweetDataset = []
+    userList = getUser([936664960494718976], 1)
+    print("finished getting accounts")
+    for user in userList:
+        userDict = getTweets(user, 20)
+        tweetDataset.append(userDict)
+        pickle.dump(tweetDataset, open("tweetDataset.p", "wb"))
     pass
