@@ -67,10 +67,11 @@ def getTweets(userId, count):
                 page += 1
                 time.sleep(1)
     except tweepy.TweepError as e:
-        if (e=='Twitter error response: status code = 429'):
-            print(f"Rate limit reached at {time.localtime(time.time())}")
-            time.sleep((15*60)+2)
-            print("Continuing to find tweets")
+        print (e)
+        # if (e=='Twitter error response: status code = 429'):
+        print(f"Rate limit reached at {time.localtime(time.time())}")
+        time.sleep((15*60)+2)
+        print("Continuing to find tweets")
     userDict = {
         userId: tweets
     }
