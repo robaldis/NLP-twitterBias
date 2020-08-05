@@ -82,11 +82,11 @@ def getTweets(userId, count):
 
 
 if __name__ == "__main__":
-    tweetDataset = []
+    # tweetDataset = []
     userList = getUser([936664960494718976], 2)
     print("finished getting accounts")
     for user in userList:
         userDict = getTweets(user, 1000)
-        tweetDataset.append(userDict)
-        pickle.dump(tweetDataset, open("tweetDataset.p", "wb"))
+        # tweetDataset.append(userDict)
+        pickle.dump(userDict, open(f"tweets/{user}.p", "wb"))
     pass
