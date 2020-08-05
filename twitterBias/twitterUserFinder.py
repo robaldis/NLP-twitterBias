@@ -31,6 +31,7 @@ def limit_handler(cursor):
             return
         except tweepy.TweepError:
             print("Can't get this information skipping the user")
+            return
 
 def getUser(userList, iterations):
 
@@ -82,7 +83,7 @@ def getTweets(userId, count):
 
 if __name__ == "__main__":
     tweetDataset = []
-    userList = getUser([936664960494718976], 3)
+    userList = getUser([936664960494718976], 2)
     print("finished getting accounts")
     for user in userList:
         userDict = getTweets(user, 1000)
