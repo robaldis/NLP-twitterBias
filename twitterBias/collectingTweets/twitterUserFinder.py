@@ -88,5 +88,5 @@ if __name__ == "__main__":
     for user in userList:
         userDict = getTweets(user, 1000)
         # tweetDataset.append(userDict)
-        pickle.dump(userDict, open(f"tweets/{user}.p", "wb"))
+        pickle.dump(userDict, open(f"twitterBias/tweets/{user}.p", "wb"))
     pass
