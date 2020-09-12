@@ -53,7 +53,7 @@ def getTweets(userId, count):
     lenPrev = 0
     try:
         while True:
-            for tweet in tweepy.Cursor(api.user_timeline,user_id=userId,page=page).items():
+            for tweet in tweepy.Cursor(api.user_timeline,user_id=userId,page=page, tweet_mode="extended").items():
                 tweets.append(tweet)
             if len(tweets) < count and len(tweets) > lenPrev:
                 lenPrev = len(tweets)
