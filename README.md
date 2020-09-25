@@ -12,3 +12,6 @@ After running the code storing all the data in one larger variable I ran into a 
   
 ### Organising the data
 the tweets for each user has a lot of extra data that I didn't need for analyzing the data. The first way to cut down on the data is to only collect the text of the tweets which cut the size down a lot.
+
+
+## Representing the data

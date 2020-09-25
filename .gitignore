@@ -132,3 +132,6 @@ dmypy.json
 # Pickled files
 *.p
 *.pkl
+
+#vscode
+.vscode
