@@ -15,3 +15,12 @@ the tweets for each user has a lot of extra data that I didn't need for analyzin
 
 
 ## Representing the data
+### Most common words
+From the top 25 words used by all the accounts doesn't look very interesting, all the words seem to be either very nuteral and words youd expect to be the most common in the English language. This hopefully proves that the data gathered would be whats expected, mainly there are not anomalies. The only one that could be seen as a bit off would be 'gracias' being that it's another language. Not all the accounts would have been English speakers however so this is also understandable.
+![commonWords](/images/commonWords.png)
+
+### Most used accounts
+Looking at this graph it is very clear to see that very few accounts will have a lot of influence on any of the information gathered from this data as they will have more words. This could present a problem due to the fact the goal was to find a representation from many accounts from twitter. However, it may not be too bad as there are still many account above 750 words each.
+
+Another thought is that the accounts with less words for all thier tweets are more likely to be bot accounts on twitter which could make some of the information useless, so getting rid of all the accounts under 500 may help stop this from happening.
+![usedAccounts](/images/mostUsedAccounts.png)
