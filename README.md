@@ -30,7 +30,7 @@ Another thought is that the accounts with less words for all thier tweets are mo
 ### Most common words for top account
 after analysing the most used words for the top few accounts I think it is clear that the data gathered is not large enough to give a significant view of how people comunicate on twitter. The account with the highest words only had a highest common word used at most 4 times. Either the cleaning of data has not been sucessful and words have been muddled up in the process or that data gathered is not enough. 
 
-![CommonWordsTopAccount](/images/commonWordsTopAccount)
+![CommonWordsTopAccount](/images/commonWordsTopAccount.png)
 
 ## Conclusion
 To conclude the project to answer how positive or negative twitter is more data collection would be needed over a wider range of popular accounts, the ones that have the most impact on twitter. The data that has been collected doesn't include this type of information after going through to represent that data that was collected. The problem is that there are not enough accounts that have a high enough word count to produce meaning full results in the analysis of the data. Another issue could be due to unsuccesfull cleaning of the data, This is very likely a big factor and would need to be worked on a lot more if being done again.
